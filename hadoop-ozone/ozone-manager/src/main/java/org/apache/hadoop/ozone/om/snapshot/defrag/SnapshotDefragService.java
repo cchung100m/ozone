@@ -737,7 +737,7 @@ public class SnapshotDefragService extends BackgroundService
               snapshotInfo.getTableKey(), snapshotInfo.getSnapshotId(), closeException);
         }
       }
-      if (defragSuccessful && checkpointLocation.toFile().exists()) {
+      if (!defragSuccessful && checkpointLocation.toFile().exists()) {
         try {
           deleteDirectory(checkpointLocation);
           LOG.info("Cleaned up failed checkpoint directory for snapshot: {} (ID: {})",
