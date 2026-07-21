@@ -1023,6 +1023,8 @@ public class TestSnapshotDefragService {
       // Verify that checkpointMetadataManager.close() was called in the finally block
       // This confirms the finally block executed despite the exception
       verify(checkpointMetadataManager).close();
+      // Verify that the temporary checkpoint directory was deleted after failure
+      assertFalse(checkpointPath.exists(), "Checkpoint directory should be deleted after defragmentation failure");
     }
   }
 
